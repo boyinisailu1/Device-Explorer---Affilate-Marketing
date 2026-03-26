@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #0B0F19;
+  --color-brand-accent: #3B82F6;
+  --color-brand-text: #E5E7EB;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-black;
+    color: var(--color-brand-text);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   GLASS MORPHISM EFFECTS
+───────────────────────────────────────────────────────────── */
+
+.glass {
+  @apply backdrop-blur-xl;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-hover:hover {
+  @apply shadow-xl;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* ─────────────────────────────────────────────────────────
+   KEYFRAMES  —  GPU-only (transform + opacity only)
+   Cubic-bezier curves tuned for organic, silky motion
+───────────────────────────────────────────────────────── */
+
+/* Cinematic slow parallax drift — replaces old 'breathing' */
+@keyframes cinematic-drift {
+  0%   { transform: translateZ(0) scale(1.06) translate(0%,   0%   ); }
+  25%  { transform: translateZ(0) scale(1.08) translate(0.4%, -0.3%); }
+  50%  { transform: translateZ(0) scale(1.07) translate(0.6%,  0.4%); }
+  75%  { transform: translateZ(0) scale(1.09) translate(-0.3%, 0.3%); }
+  100% { transform: translateZ(0) scale(1.06) translate(0%,   0%   ); }
+}
+
+/* Vignette subtle breathe */
+@keyframes vignette-breathe {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.88; }
+}
+
+/* Colour glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1;    transform: translateZ(0) scale(1);    }
+  50%       { opacity: 0.6; transform: translateZ(0) scale(1.12); }
+}
+
+/* Pulse slow (kept for compatibility) */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1);   }
+  50%       { opacity: 0.4; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Float slow (kept for compatibility) */
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0);        opacity: 0.2; }
+  50%       { transform: translate(100px, -50px); opacity: 0.5; }
+}
+
+/* Page fade-in */
+@keyframes page-fade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   UTILITY CLASSES
+───────────────────────────────────────────────────────── */
+
+/* Image layer — ultra-slow organic drift, sigmoid-ease cubic-bezier */
+.animate-cinematic-drift {
+  animation: cinematic-drift 28s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+/* Vignette breathe — very gentle */
+.animate-vignette-breathe {
+  animation: vignette-breathe 12s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+/* Glow pulse — soft and slow */
+.animate-glow-pulse {
+  animation: glow-pulse 10s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+  animation-delay: -3s;
+}
+
+/* Page fade-in — eased with slight overshoot feel */
+.animate-page-fade-in {
+  animation: page-fade-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Legacy classes kept for other components */
+.animate-breathing {
+  animation: cinematic-drift 28s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 10s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 20s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.animate-float-delayed {
+  animation: float-slow 25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite reverse;
+  animation-delay: -5s;
+}
+
+.animate-float-fast {
+  animation: float-slow 14s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  animation-delay: -3s;
+}
+
+/* ─────────────────────────────────────────────────────────
+   REMOVE ALL DECORATIVE GLOW EFFECTS
+───────────────────────────────────────────────────────────── */
+.blur-\[40px\],
+.blur-\[80px\],
+.blur-\[120px\] {
+  display: none !important;
+}
