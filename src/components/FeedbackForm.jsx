@@ -32,7 +32,7 @@ export default function FeedbackForm() {
           name: formData.name,
           email: formData.email,
           rating: formData.rating,
-          feedback: formData.feedback
+          message: formData.feedback
         }]);
 
       if (error) throw error;
