@@ -1,0 +1,19 @@
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cream oval background with stars -->
+  <ellipse cx="420" cy="100" rx="160" ry="110" fill="#FFFACD" stroke="#999" stroke-width="2"/>
+  
+  <!-- Stars -->
+  <g fill="#000">
+    <!-- Top right star -->
+    <path d="M 540 80 L 548 100 L 570 100 L 553 115 L 561 135 L 540 120 L 519 135 L 527 115 L 510 100 L 532 100 Z"/>
+    
+    <!-- Bottom left stars cluster -->
+    <path d="M 380 180 L 386 200 L 408 200 L 391 215 L 397 235 L 380 220 L 363 235 L 369 215 L 352 200 L 374 200 Z"/>
+    <path d="M 440 200 L 446 220 L 468 220 L 451 235 L 457 255 L 440 240 L 423 255 L 429 235 L 412 220 L 434 220 Z"/>
+    <path d="M 410 230 L 416 250 L 438 250 L 421 265 L 427 285 L 410 270 L 393 285 L 399 265 L 382 250 L 404 250 Z"/>
+  </g>
+  
+  <!-- Main DEVX Text with outline -->
+  <text x="80" y="145" font-family="Arial, sans-serif" font-size="120" font-weight="900" fill="#FFB800" stroke="#000" stroke-width="5" letter-spacing="12">DEVX</text>
+  <text x="80" y="145" font-family="Arial, sans-serif" font-size="120" font-weight="900" fill="#FFC700" letter-spacing="12">DEVX</text>
+</svg>

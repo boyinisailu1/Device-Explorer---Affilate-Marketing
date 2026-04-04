@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Smartphone, ExternalLink } from 'lucide-react';
+import { Smartphone, ExternalLink, CheckCircle, Zap } from 'lucide-react';
 import { formatPrice } from '../lib/utils';
 
 export default function DeviceCard({ device }) {
@@ -27,8 +27,13 @@ export default function DeviceCard({ device }) {
 
       <div className="space-y-1 sm:space-y-2 relative z-10">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-2">
-          <div className="min-w-0">
-            <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-blue-500 mb-0.5 sm:mb-1 block truncate">{device.brand}</span>
+          <div className="min-w-0 flex-1">
+            <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-blue-500 mb-0.5 sm:mb-1 block truncate flex items-center gap-1">
+              {device.brand}
+              {device.verified && (
+                <CheckCircle size={10} className="sm:size-3 text-green-400 flex-shrink-0" title="Verified specs" />
+              )}
+            </span>
             <h3 className="text-sm sm:text-lg lg:text-xl font-bold group-hover:text-blue-400 transition-colors text-white truncate">{device.name}</h3>
           </div>
           <span className="font-black text-xs sm:text-base lg:text-lg text-white whitespace-nowrap">{formatPrice(device.price)}</span>

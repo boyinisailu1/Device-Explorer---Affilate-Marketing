@@ -75,6 +75,30 @@
   100% { opacity: 1; }
 }
 
+/* Smooth fade-in with slide-up */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth slide down fade-out */
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
 /* ─────────────────────────────────────────────────────────
    UTILITY CLASSES
 ───────────────────────────────────────────────────────── */
@@ -98,6 +122,16 @@
 /* Page fade-in — eased with slight overshoot feel */
 .animate-page-fade-in {
   animation: page-fade-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Smooth fade-in animation for page transitions */
+.animate-fade-in {
+  animation: fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Smooth fade-out animation */
+.animate-fade-out {
+  animation: fade-out 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Legacy classes kept for other components */

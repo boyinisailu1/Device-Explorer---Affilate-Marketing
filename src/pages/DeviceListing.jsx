@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { Smartphone, Filter, Search, Plus } from 'lucide-react';
+import { Filter, Search, Plus, BarChart3 } from 'lucide-react';
 import DeviceCard from '../components/DeviceCard';
-import AdSlot from '../components/AdSlot';
 import { useAuth } from '../components/AuthContext';
 
 export default function DeviceListing() {
@@ -109,24 +108,37 @@ export default function DeviceListing() {
 
         {/* Device Grid */}
         <div className="flex-1">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold">
-              {filters.category !== 'All' ? filters.category : 'All Devices'}
-            </h1>
-            {profile?.role === 'admin' && (
-              <Link 
-                to="/admin/dashboard" 
-                state={{ category: filters.category !== 'All' ? filters.category : 'Smartphones' }}
-                className="flex items-center space-x-2 px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold shadow-lg shadow-blue-600/20 transition-all hover:scale-105"
-              >
-                <Plus size={20} />
-                <span>Add Device</span>
-              </Link>
-            )}
+          <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8">
+            <div>
+              <h1 className="text-3xl font-bold mb-2">
+                {filters.category !== 'All' ? filters.category : 'All Devices'}
+              </h1>
+              <p className="text-gray-400">
+                {loading ? 'Loading...' : `${devices.length} device${devices.length !== 1 ? 's' : ''} found`}
+              </p>
+            </div>
+            <div className="flex gap-3">
+              {devices.length > 0 && (
+                <Link 
+                  to={`/compare?category=${filters.category}`}
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl font-bold text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all text-sm whitespace-nowrap"
+                >
+                  <BarChart3 size={18} />
+                  Compare
+                </Link>
+              )}
+              {profile?.role === 'admin' && (
+                <Link 
+                  to="/admin/dashboard" 
+                  state={{ category: filters.category !== 'All' ? filters.category : 'Smartphones' }}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all text-sm"
+                >
+                  <Plus size={18} />
+                  <span>Add</span>
+                </Link>
+              )}
+            </div>
           </div>
-
-          {/* Header Ad Slot */}
-          <AdSlot position="header" />
 
           {loading ? (
             <div className="flex items-center justify-center h-64">
@@ -138,16 +150,8 @@ export default function DeviceListing() {
             </div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {devices.map((device, index) => (
-                <div key={device.id} className="contents">
-                  <DeviceCard device={device} />
-                  {/* Inject In-Feed Ad after every 6th item */}
-                  {(index + 1) % 6 === 0 && (
-                    <div className="sm:col-span-2 xl:col-span-1">
-                      <AdSlot position="in_feed" />
-                    </div>
-                  )}
-                </div>
+              {devices.map((device) => (
+                <DeviceCard key={device.id} device={device} />
               ))}
             </div>
           )}

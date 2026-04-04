@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase';
 // The frontend calls the 'chatbot-ai' Edge Function instead of Gemini directly.
 
 
-const SYSTEM_CONTEXT = `You are DeviceX AI Assistant — a friendly, knowledgeable assistant for the DeviceX platform, a premium device explorer and comparison website. 
+const SYSTEM_CONTEXT = `You are Specora AI Assistant — a friendly, knowledgeable assistant for the Specora platform, a premium device explorer and comparison website. 
 
 You help users with:
 - Device recommendations (phones, laptops, tablets, watches, audio)
@@ -32,7 +32,7 @@ export default function ChatBot() {
     {
       id: 1,
       role: 'assistant',
-      text: "Hi! I'm **DeviceX AI** ✨ Your personal tech assistant. Ask me anything about phones, laptops, tablets, or any gadget — I'm here to help!",
+      text: "Hi! I'm **Specora AI** ✨ Your personal tech assistant. Ask me anything about phones, laptops, tablets, or any gadget — I'm here to help!",
       time: new Date(),
     },
   ]);
@@ -139,7 +139,7 @@ export default function ChatBot() {
       {
         id: 1,
         role: 'assistant',
-        text: "Hi! I'm **DeviceX AI** ✨ Your personal tech assistant. Ask me anything about phones, laptops, tablets, or any gadget — I'm here to help!",
+        text: "Hi! I'm **Specora AI** ✨ Your personal tech assistant. Ask me anything about phones, laptops, tablets, or any gadget — I'm here to help!",
         time: new Date(),
       },
     ]);
@@ -152,7 +152,7 @@ export default function ChatBot() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen((o) => !o)}
-        aria-label="Open DeviceX AI Chat"
+        aria-label="Open Specora AI Chat"
         className="chatbot-fab"
         style={{
           position: 'fixed',
@@ -253,7 +253,7 @@ export default function ChatBot() {
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span style={{ color: 'white', fontWeight: 700, fontSize: '15px', fontFamily: 'Inter, sans-serif' }}>
-                DeviceX AI
+                Specora AI
               </span>
               <Sparkles size={13} color="#a78bfa" />
             </div>
@@ -264,7 +264,7 @@ export default function ChatBot() {
                 display: 'inline-block',
                 animation: 'dotBlink 1.5s ease-in-out infinite',
               }} />
-              <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px' }}>Online · Powered by Gemini</span>
+              <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px' }}>Online · Ask any question</span>
             </div>
           </div>
           <button

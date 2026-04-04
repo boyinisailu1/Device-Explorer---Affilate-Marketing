@@ -1,19 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero3D from '../components/Hero3D';
-import { Smartphone, Tablet, Laptop, Watch, Headphones } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import DeviceCard from '../components/DeviceCard';
 import HeroBackground from '../components/HeroBackground';
-import NewsFeed from '../components/NewsFeed';
+import TrustSignals from '../components/TrustSignals';
+import ComparisonCTA from '../components/ComparisonCTA';
+
+// Import category images from assets
+import phoneImg from '../assets/phone.jpg';
+import tabletImg from '../assets/Tablet.jpg';
+import laptopImg from '../assets/laptop.jpg';
+import watchImg from '../assets/Watch.jpg';
+import audioImg from '../assets/Audio.jpg';
 
 export default function Home() {
   const categories = [
-    { name: 'Smartphones', icon: Smartphone, color: 'text-blue-500' },
-    { name: 'Tablets', icon: Tablet, color: 'text-purple-500' },
-    { name: 'Laptops', icon: Laptop, color: 'text-green-500' },
-    { name: 'Watches', icon: Watch, color: 'text-rose-500' },
-    { name: 'Audio', icon: Headphones, color: 'text-yellow-500' },
+    { name: 'Smartphones', image: phoneImg },
+    { name: 'Tablets', image: tabletImg },
+    { name: 'Laptops', image: laptopImg },
+    { name: 'Watches', image: watchImg },
+    { name: 'Audio', image: audioImg },
   ];
 
   const [featuredDevices, setFeaturedDevices] = useState([]);
@@ -56,19 +63,30 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-center md:text-left">Browse Categories</h2>
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
             {categories.map((cat) => (
-              <Link key={cat.name} to={`/devices?category=${cat.name}`} className="glass relative overflow-hidden glass-hover p-6 rounded-2xl flex flex-col items-center justify-center space-y-4 aspect-square transition-all group shadow-lg">
-                <div className={`p-5 rounded-full bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors shadow-inner ${cat.color}`}>
-                  <cat.icon size={40} />
+              <Link key={cat.name} to={`/devices?category=${cat.name}`} className="relative overflow-hidden rounded-2xl shadow-lg group cursor-pointer h-48 lg:h-56 flex flex-col">
+                {/* Background Image */}
+                <img 
+                  src={cat.image} 
+                  alt={cat.name}
+                  className="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
+                />
+                
+                {/* Dark Overlay - stronger at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/70 group-hover:from-black/10 group-hover:via-black/20 group-hover:to-black/60 transition-all duration-300" />
+                
+                {/* Category Name - at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-center">
+                  <button className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold text-sm lg:text-base hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] transition-all transform group-hover:scale-105 border border-blue-400/50">
+                    {cat.name}
+                  </button>
                 </div>
-                <span className="font-semibold text-lg text-gray-200 group-hover:text-white transition-colors">{cat.name}</span>
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
             ))}
           </div>
         </div>
 
         {/* Latest Devices */}
-        <div className="mb-16">
+        <div className="mb-24">
           <div className="flex justify-between items-end mb-8">
             <h2 className="text-3xl font-bold">Latest Devices</h2>
             <Link to="/devices" className="text-[var(--color-brand-accent)] hover:underline font-semibold">View All &rarr;</Link>
@@ -79,10 +97,14 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Device News Feed */}
-        <NewsFeed />
+      {/* Trust Signals Section */}
+      <TrustSignals />
 
+      {/* Comparison CTA */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ComparisonCTA />
       </div>
     </div>
   );

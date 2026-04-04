@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, MonitorSmartphone, User, LogOut, Settings, Menu, X } from 'lucide-react';
+import { Search, User, LogOut, Settings, Menu, X } from 'lucide-react';
 import { useAuth } from './AuthContext';
 import { supabase } from '../lib/supabase';
+import devxLogo from '../assets/devx-logo.svg';
 
 export default function Navbar() {
   const { user, profile } = useAuth();
@@ -29,7 +30,7 @@ export default function Navbar() {
     { name: 'Smartphones', to: '/devices?category=Smartphones' },
     { name: 'Tablets', to: '/devices?category=Tablets' },
     { name: 'Laptops', to: '/devices?category=Laptops' },
-    { name: 'News', href: '/#news-feed' },
+    { name: 'News', to: '/news' },
     { name: 'Compare', to: '/compare' },
   ];
 
@@ -49,9 +50,8 @@ export default function Navbar() {
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
-            <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center space-x-2 group">
-              <MonitorSmartphone className="w-8 h-8 text-[var(--color-brand-accent)] group-hover:scale-110 transition-transform duration-300" />
-              <span className="font-bold text-xl tracking-tight text-white group-hover:text-[var(--color-brand-accent)] transition-colors">DevX</span>
+            <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center group">
+              <img src={devxLogo} alt="DEVX Logo" className="h-12 w-auto group-hover:scale-110 transition-transform duration-300" />
             </Link>
           </div>
           
@@ -70,20 +70,20 @@ export default function Navbar() {
 
           <div className="flex items-center space-x-3 sm:space-x-4">
             {/* ── Search Bar ── */}
-            <form onSubmit={handleSearch} className="relative group hidden sm:block">
+            <form onSubmit={handleSearch} className="relative group hidden sm:flex items-center">
               <input 
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search specs..." 
-                className="bg-white/5 border border-white/10 text-sm rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-accent)] focus:bg-white/10 text-white placeholder-gray-400 w-32 lg:w-48 transition-all group-hover:w-64 focus:w-64"
+                placeholder="Search devices..." 
+                className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-2 border-yellow-400/30 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:from-yellow-500/20 focus:to-orange-500/20 text-white placeholder-gray-400 w-32 lg:w-56 transition-all group-hover:border-yellow-400/60 group-hover:w-72 focus:w-72 focus:border-yellow-400/60"
               />
               <button
                 type="submit"
-                className="absolute left-3 top-2.5 p-0 bg-transparent border-none cursor-pointer"
+                className="absolute left-3 top-3 p-0 bg-transparent border-none cursor-pointer hover:scale-110 transition-transform"
                 aria-label="Search"
               >
-                <Search className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+                <Search className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300 transition-colors" />
               </button>
             </form>
 
@@ -136,10 +136,10 @@ export default function Navbar() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search specs..." 
-                className="w-full bg-white/5 border border-white/10 text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                placeholder="Search devices..." 
+                className="w-full bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-2 border-yellow-400/30 text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 focus:border-yellow-400"
               />
-              <Search className="absolute left-3 top-3.5 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-3.5 w-5 h-5 text-yellow-400" />
             </form>
 
             {menuLinks.map((link) => (
